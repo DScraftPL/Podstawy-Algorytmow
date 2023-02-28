@@ -16,8 +16,6 @@ int main()
     cin >> x >> y;
     wypelnijTablice(t, n, x, y);
     wyswietl(t, n);
-    sortowanieBabelkowe(t, n, 1);
-    wyswietl(t, n);
     int* sito = sitoErastotenesa(y);
     cout << "1.1 done\n";
     cout << "min: " << minimum(t, n) << endl;

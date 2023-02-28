@@ -134,27 +134,33 @@ int sumaCyfr(int x)
 void sortowanieBabelkowe(int *tab, int n, int tryb)
 {
     int temp;
-    if(tryb == 1)
+    if(tryb == 0)
     {
-        for(int i=0; i<n-1; i++)
+        for(int k = 0; k<n; k++)
         {
-            if(tab[i]<tab[i+1])
+           for(int i=0; i<n-1-k; i++)
             {
-                temp = tab[i];
-                tab[i] = tab[i+1];
-                tab[i+1] = temp;
+                if(tab[i]>tab[i+1])
+                {
+                    temp = tab[i];
+                    tab[i] = tab[i+1];
+                    tab[i+1] = temp;
+                }
             }
-        }
+        }  
     }
     else
     {
-        for(int i=n; i>0; i++)
+        for(int k = 0; k<n; k++)
         {
-            if(tab[i]>tab[i-1])
+            for(int i=n-1; i>k; i--)
             {
-                temp = tab[i];
-                tab[i] = tab[i+1];
-                tab[i+1] = temp;
+                if(tab[i]>tab[i-1])
+                {
+                    temp = tab[i];
+                    tab[i] = tab[i-1];
+                    tab[i-1] = temp;
+                }
             }
         }
     }
