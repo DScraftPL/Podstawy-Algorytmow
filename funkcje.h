@@ -5,13 +5,21 @@
 using namespace std;
 
 void przydzielPamiec(int*&, int);
+
 void wypelnijTablice(int*, int, int, int);
+
 void usunTablice(int*&);
+
 void wyswietl(int*, int);
+
 int minimum(int*, int);
+
 int maximum(int*, int);
+
 void ileLiczb09(int*, int);
+
 int* sitoErastotenesa(int);
+
 int sumaCyfr(int);
 
 void przydzielPamiec(int *&tab, int n)
