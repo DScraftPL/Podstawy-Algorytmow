@@ -22,6 +22,12 @@ int* sitoErastotenesa(int);
 
 int sumaCyfr(int);
 
+void sortowanieBabelkowe(int*, int, int);
+
+void sortowaniePrzezWybor(int*, int, int);
+
+void sortowaniePrzezWstawianie(int*, int, int);
+
 void przydzielPamiec(int *&tab, int n)
 {
     tab = new int[n];
@@ -123,4 +129,43 @@ int sumaCyfr(int x)
         x = x/10;
     }
     return suma;
+}
+
+void sortowanieBabelkowe(int *tab, int n, int tryb)
+{
+    int temp;
+    if(tryb == 1)
+    {
+        for(int i=0; i<n-1; i++)
+        {
+            if(tab[i]<tab[i+1])
+            {
+                temp = tab[i];
+                tab[i] = tab[i+1];
+                tab[i+1] = temp;
+            }
+        }
+    }
+    else
+    {
+        for(int i=n; i>0; i++)
+        {
+            if(tab[i]>tab[i-1])
+            {
+                temp = tab[i];
+                tab[i] = tab[i+1];
+                tab[i+1] = temp;
+            }
+        }
+    }
+}
+
+void sortowaniePrzezWybor(int *tab, int n, int tryb)
+{
+
+}
+
+void sortowanieWstawianie(int *tab, int n, int tryb)
+{
+
 }
