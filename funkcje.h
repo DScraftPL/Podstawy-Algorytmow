@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
+#include <algorithm>
 
 using namespace std;
 
@@ -149,7 +150,7 @@ void sortowanieBabelkowe(int *tab, int n, int tryb)
             }
         }  
     }
-    else
+    else if(tryb == 1)
     {
         for(int k = 0; k<n; k++)
         {
@@ -168,10 +169,53 @@ void sortowanieBabelkowe(int *tab, int n, int tryb)
 
 void sortowaniePrzezWybor(int *tab, int n, int tryb)
 {
-
+    if(tryb == 0)
+    {   int maksi;
+        for(int i=0; i<n; i++)
+        {
+            maksi = 0;
+            for(int j=1; j<n-i; j++)
+            {
+                if(tab[j]>tab[maksi])
+                {
+                    maksi = j;
+                }
+            }
+            swap(tab[maksi], tab[n-i-1]);
+        }
+    }
+    else if(tryb == 1)
+    {
+        int minii;
+        for(int i=0; i<n; i++)
+        {
+            minii = 0;
+            for(int j=1; j<n-i-1; j++)
+            {
+                if(tab[j]<tab[minii])
+                {
+                    minii = j;
+                }
+            }
+            swap(tab[minii], tab[n-i-1]);
+        }
+    }
 }
 
-void sortowanieWstawianie(int *tab, int n, int tryb)
+void sortowaniePrzezWstawianie(int *tab, int n, int tryb)
 {
-
+    for(int i=1; i<n; i++)
+    {
+        for(int j=i; j>0; j--)
+        {
+            if(tab[j]<tab[j-1] && tryb == 0)
+            {
+                swap(tab[j], tab[j-1]);
+            }
+            if(tab[j]>tab[j-1] && tryb == 1)
+            {
+                swap(tab[j], tab[j-1]);
+            }
+        }
+    }
 }
