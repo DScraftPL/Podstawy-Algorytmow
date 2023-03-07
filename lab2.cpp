@@ -6,6 +6,7 @@ using namespace std;
 int main()
 {
     int n, wybor,*t, tryb;
+    cout << "Podaj rozmiar tablicy\n";
     cin >> n;
     while(n>0)
     {
@@ -32,6 +33,7 @@ int main()
         }
         wyswietl(t, n);
         delete(t);
+        cout << "podaj rozmiar tablicy\n";
         cin >> n;
     }
     return 0;

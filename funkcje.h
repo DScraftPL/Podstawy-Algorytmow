@@ -29,6 +29,8 @@ void sortowaniePrzezWybor(int*, int, int);
 
 void sortowaniePrzezWstawianie(int*, int, int);
 
+void sortowanieBabelkowe2D(int**, int, int, int, int);
+
 void przydzielPamiec(int *&tab, int n)
 {
     tab = new int[n];
@@ -143,9 +145,7 @@ void sortowanieBabelkowe(int *tab, int n, int tryb)
             {
                 if(tab[i]>tab[i+1])
                 {
-                    temp = tab[i];
-                    tab[i] = tab[i+1];
-                    tab[i+1] = temp;
+                    swap(tab[i], tab[i+1]);
                 }
             }
         }  
@@ -158,9 +158,7 @@ void sortowanieBabelkowe(int *tab, int n, int tryb)
             {
                 if(tab[i]>tab[i-1])
                 {
-                    temp = tab[i];
-                    tab[i] = tab[i-1];
-                    tab[i-1] = temp;
+                    swap(tab[i],tab[i-1]);
                 }
             }
         }
@@ -204,7 +202,44 @@ void sortowaniePrzezWybor(int *tab, int n, int tryb)
 
 void sortowaniePrzezWstawianie(int *tab, int n, int tryb)
 {
-    for(int i=1; i<n; i++)
+    if(tryb == 0)
+    {
+        int i = n-2,temp,j;
+        while(i>=0)
+        {
+            j=i;
+            temp = tab[j];
+            while(temp > tab[j+1] && j < n-1)
+            {
+                tab[j] = tab[j+1];
+                j++;
+            }
+            tab[j] = temp;
+            i = i-1;
+        }
+    }
+    else if(tryb == 1)
+    {
+        int i = n-2,temp,j;
+        while(i>=0)
+        {
+            j=i;
+            temp = tab[j];
+            while(temp < tab[j+1] && j < n-1)
+            {
+                tab[j] = tab[j+1];
+                j++;
+            }
+            tab[j] = temp;
+            i = i-1;
+        }
+    }
+}
+
+
+
+
+  /*  for(int i=1; i<n; i++)
     {
         for(int j=i; j>0; j--)
         {
@@ -218,4 +253,29 @@ void sortowaniePrzezWstawianie(int *tab, int n, int tryb)
             }
         }
     }
+    */
+
+
+void sortowanieBabelkowe2D(int **tab, int w, int k, int tryb, int nrKol)
+{
+    for(int i=0; i<k; i++)
+    {
+        for(int j=0; j<k-i-1; j++)
+        {
+            if(tab[nrKol][j] > tab[nrKol][j+1] && tryb == 0)
+            {
+                for(int wier = 0; wier < w; wier++)
+                {
+                    swap(tab[wier][j], tab[wier][j+1]);
+                }
+            }
+            else if(tab[nrKol][j] < tab[nrKol][j+1] && tryb == 1)
+            {
+                for(int wier = 0; wier < w; wier++)
+                {
+                    swap(tab[wier][j], tab[wier][j+1]);
+                }
+            }
+        }
+    }    
 }
