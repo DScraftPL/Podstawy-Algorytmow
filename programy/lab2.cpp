@@ -1,5 +1,5 @@
 #include <iostream>
-#include "'Podstawy Algorytmów'/funkcje.h"
+#include "../funkcje.h"
 
 using namespace std;
 

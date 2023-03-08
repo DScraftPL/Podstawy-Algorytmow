@@ -1,3 +1,6 @@
+#ifndef FUNKCJE_H
+#define FUNKCJE_H
+
 #include <iostream>
 #include <time.h>
 #include <cstdlib>
@@ -279,3 +282,5 @@ void sortowanieBabelkowe2D(int **tab, int w, int k, int tryb, int nrKol)
         }
     }    
 }
+
+#endif //FUNKCJE_H
