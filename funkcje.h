@@ -8,6 +8,12 @@
 
 using namespace std;
 
+typedef struct student {
+    string imie;
+    string nazwisko;
+    int punkty;
+} student;
+
 void przydzielPamiec(int*&, int);
 
 void wypelnijTablice(int*, int, int, int);
@@ -33,6 +39,10 @@ void sortowaniePrzezWybor(int*, int, int);
 void sortowaniePrzezWstawianie(int*, int, int);
 
 void sortowanieBabelkowe2D(int**, int, int, int, int);
+
+void sortowanieQuickSort(student*, int, int);
+
+void wyswietlStudentow(student*, int);
 
 void przydzielPamiec(int *&tab, int n)
 {
@@ -281,6 +291,44 @@ void sortowanieBabelkowe2D(int **tab, int w, int k, int tryb, int nrKol)
             }
         }
     }    
+}
+
+void QuickSort(student* x, int lewy, int prawy)
+{
+    int srodek = (lewy + prawy)/2;
+    int piwot = x[srodek].punkty;
+    int granica = lewy;
+    for(int i=lewy; i<prawy; i++)
+    {
+        if(x[i].punkty < piwot)
+        {
+            swap(x[granica],x[i]);
+            granica++;
+        }
+    }
+    x[prawy].punkty = x[granica].punkty;
+    x[granica].punkty = piwot;
+    if(lewy < granica - 1)
+    {
+        QuickSort(x,lewy,granica-1);
+    }
+    if(granica + 1 < prawy)
+    {
+        QuickSort(x,granica+1,prawy);
+    }
+}
+
+void sortowanieQuickSort(student* tab, int n, int tryb)
+{
+    QuickSort(tab, 0, n);
+}
+
+void wyswietlStudentow(student* tab, int n) 
+{ 
+    for(int i=0; i<n; i++)
+    {
+        cout << tab[i].imie << " " << tab[i].nazwisko << " " << tab[i].punkty << endl;
+    }
 }
 
 #endif //FUNKCJE_H
