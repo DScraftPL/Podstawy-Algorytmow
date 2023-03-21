@@ -14,6 +14,11 @@ typedef struct student {
     int punkty;
 } student;
 
+typedef struct elementy {
+    int g1;
+    int g2;
+} elementy;
+
 void przydzielPamiec(int*&, int);
 
 void wypelnijTablice(int*, int, int, int);
@@ -43,6 +48,10 @@ void sortowanieBabelkowe2D(int**, int, int, int, int);
 void sortowanieQuickSort(student*, int, int);
 
 void wyswietlStudentow(student*, int);
+
+elementy flagaFrancuskaMod3(student*, int);
+
+int flagaPolska(student, int, int);
 
 void przydzielPamiec(int *&tab, int n)
 {
@@ -327,8 +336,69 @@ void wyswietlStudentow(student* tab, int n)
 { 
     for(int i=0; i<n; i++)
     {
-        cout << tab[i].imie << " " << tab[i].nazwisko << " " << tab[i].punkty << endl;
+        cout << tab[i].imie << " " << tab[i].nazwisko << " " << tab[i].punkty;
     }
+}
+
+int flagaPolska(student* tab, int n, int granica)
+{
+    int i = 0;
+    int j = n-1;
+    //cout << i << j;
+    while(i<j)
+    {
+        while(tab[i].punkty <= granica && i<j)
+        {
+            i++;
+        }
+        while(tab[j].punkty > granica && i<j)
+        {
+            j--;
+        }
+        if(i<j)
+        {
+            swap(tab[i],tab[j]);
+            i++;
+            j++;
+        }
+    }
+    if(tab[i].punkty <= granica)
+    {
+        return i+1;
+    }
+    else
+    {
+        return i;
+    }
+}
+
+elementy flagaFrancuskaMod3(student *tab, int n)
+{
+    elementy granica;
+    int i=-1;
+    int j=0;
+    int k = n;
+    while(j<k)
+    {
+        if(tab[j].punkty %3 == 0)
+        {
+            i++;
+            swap(tab[i],tab[j]);
+            j++;
+        }
+        if(tab[j].punkty % 3 == 1)
+        {
+            k--;
+            swap(tab[k],tab[j]);
+        }
+        else
+        {
+            j++;
+        }
+    }
+    granica.g1 = i;
+    granica.g2 = k;
+    return granica;
 }
 
 #endif //FUNKCJE_H
