@@ -401,4 +401,100 @@ elementy flagaFrancuskaMod3(student *tab, int n)
     return granica;
 }
 
+void naiwnyTekst(string tekst, string klucz)
+{
+    for(int i=0;  i<tekst.size(); i++)
+    {
+        if(tekst[i]==klucz[0])
+        {
+            bool tempCheck = true;
+            for(int j=1; j<klucz.size(); j++)
+            {
+                if(tekst[i+j]!=klucz[j])
+                {
+                    tempCheck = false;
+                }
+            }
+            if(tempCheck)
+            {
+                cout << i << " ";
+            }
+        }
+    }
+}
+
+int* tablicaPrefixów(string klucz)
+{
+    int *t = new int[klucz.size()+1];
+    t[0] = 0;
+    t[1] = 0;
+    int x = 0;
+    for(int i=1; i<klucz.size(); i++)
+    {
+        while(x>0 && klucz[x]!=klucz[i])
+        {
+            x = t[x];
+        }
+        if(klucz[i] == klucz[x])
+        {
+            x++;
+        }
+        t[i+1] = x;
+    }
+    return t;
+}
+
+void knuthMorrisTekst(string tekst, string klucz, int* tabPref)
+{
+    int i=0, j=0, dlTekst = tekst.size(), dlKlucz=klucz.size();
+    while(i<dlTekst-dlKlucz+1)
+    {
+        while(klucz[j]==tekst[i+j] && j < dlKlucz)
+        {
+            j++;
+        }
+        if(j==dlKlucz)
+        {
+            cout << i << " ";
+        }
+        i = i + max(1,j-tabPref[j]);
+        j = tabPref[j];
+    }
+}
+
+int *BMTablica(string klucz)
+{
+    int *t = new int[26];
+    for(char i='a'; i<='z'; i++){
+        t[i-'a'] = -1;
+    }
+    for(int i=0; i<klucz.size(); i++){
+        char temp = klucz[i];
+        t[temp-'a'] = i;
+    }
+    return t;
+}
+
+void BMTekst(string tekst, string klucz, int* tabBM)
+{
+    int j, i = 0, dlTekst = tekst.size(), dlKlucz = klucz.size();
+    while(i<=dlTekst - dlKlucz)
+    {
+        j = dlKlucz - 1;
+        while(j>-1 && klucz[j] == tekst[i+j])
+        {
+            j--;
+        }
+        if(j==-1)
+        {
+            cout << i << " ";
+            i++;
+        }
+        else
+        {
+            i = i + max(1,j-tabBM[tekst[i+j]-'a']);
+        }
+    }
+}
+
 #endif //FUNKCJE_H
