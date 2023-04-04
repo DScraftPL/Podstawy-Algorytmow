@@ -5,6 +5,7 @@
 #include <time.h>
 #include <cstdlib>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -50,6 +51,14 @@ void sortowanieQuickSort(student*, int, int);
 void wyswietlStudentow(student*, int);
 
 elementy flagaFrancuskaMod3(student*, int);
+
+int *tablicaPrefixów(string);
+
+void knuthMorrisTekst(string, string, int*);
+
+int *BMTablica(string);
+
+void BMTekst(string, string, int*);
 
 int flagaPolska(student, int, int);
 
@@ -494,6 +503,50 @@ void BMTekst(string tekst, string klucz, int* tabBM)
         {
             i = i + max(1,j-tabBM[tekst[i+j]-'a']);
         }
+    }
+}
+
+int haszZnak(string wzorzec, char znakP, char znakK)
+{
+    int suma = 0;
+    int podstawa = (int)(znakK - znakP)+1;
+    for(int i=0; i<wzorzec.size(); i++){
+        suma += pow(podstawa,i)*((int)(wzorzec[i]-znakP));
+    }
+    return suma;
+}
+
+void KarpRabinTekst(string tekst, string wzorzec, char znakP, char znakK)
+{
+    int wzorzecHasz = haszZnak(wzorzec,znakP, znakK);
+    int wzorzecDl = wzorzec.length(), tekstDl = tekst.length();
+    int pozycja = 0;
+    bool checkWypis = 1;
+    for(int i = wzorzecDl-1; i<tekstDl; i++)
+    {
+        //cout << " i:/" << i << "/ " << " poz:/" << pozycja << "/ ";
+        string tekstSpr = tekst.substr(pozycja,wzorzecDl);
+        int tekstHasz = haszZnak(tekstSpr, znakP, znakK);
+        //cout << " /"<< tekstHasz << "/ ";
+        if(tekstHasz == wzorzecHasz){
+            bool checkNaiwny = 1;
+            int tempPozycja = pozycja;
+            for(int j=0; j<wzorzecDl; j++){
+                if(wzorzec[j]!=tekst[tempPozycja]){
+                    checkNaiwny = 0;
+                    break;
+                }
+                tempPozycja++;
+            }
+            if(checkNaiwny){
+                cout << pozycja << " ";
+                checkWypis = 0;
+            }
+        }
+        pozycja++;
+    }
+    if(checkWypis){
+        cout << "-1";
     }
 }
 
