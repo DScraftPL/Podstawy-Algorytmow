@@ -516,9 +516,9 @@ int haszZnak(string wzorzec, char znakP, char znakK)
     return suma;
 }
 
-void KarpRabinTekst(string tekst, int wzorzecHasz, int wzorzecDl, char znakP, char znakK)
+void KarpRabinTekst(string tekst, string wzorzec, int wzorzecHasz, char znakP, char znakK)
 {
-    int tekstDl = tekst.length();
+    int tekstDl = tekst.length(), wzorzecDl = wzorzec.length();
     int pozycja = 0;
     bool checkWypis = 1;
     for(int i = wzorzecDl-1; i<tekstDl; i++)
