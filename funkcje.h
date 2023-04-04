@@ -516,18 +516,15 @@ int haszZnak(string wzorzec, char znakP, char znakK)
     return suma;
 }
 
-void KarpRabinTekst(string tekst, string wzorzec, char znakP, char znakK)
+void KarpRabinTekst(string tekst, int wzorzecHasz, int wzorzecDl, char znakP, char znakK)
 {
-    int wzorzecHasz = haszZnak(wzorzec,znakP, znakK);
-    int wzorzecDl = wzorzec.length(), tekstDl = tekst.length();
+    int tekstDl = tekst.length();
     int pozycja = 0;
     bool checkWypis = 1;
     for(int i = wzorzecDl-1; i<tekstDl; i++)
     {
-        //cout << " i:/" << i << "/ " << " poz:/" << pozycja << "/ ";
         string tekstSpr = tekst.substr(pozycja,wzorzecDl);
         int tekstHasz = haszZnak(tekstSpr, znakP, znakK);
-        //cout << " /"<< tekstHasz << "/ ";
         if(tekstHasz == wzorzecHasz){
             bool checkNaiwny = 1;
             int tempPozycja = pozycja;
