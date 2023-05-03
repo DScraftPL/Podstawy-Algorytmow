@@ -20,47 +20,12 @@ typedef struct elementy {
     int g2;
 } elementy;
 
-void przydzielPamiec(int*&, int);
+typedef struct elementyStosu {
+    char data;
+    elementyStosu* next;
+} elementyStosu;
 
-void wypelnijTablice(int*, int, int, int);
 
-void usunTablice(int*&);
-
-void wyswietl(int*, int);
-
-int minimum(int*, int);
-
-int maximum(int*, int);
-
-void ileLiczb09(int*, int);
-
-int* sitoErastotenesa(int);
-
-int sumaCyfr(int);
-
-void sortowanieBabelkowe(int*, int, int);
-
-void sortowaniePrzezWybor(int*, int, int);
-
-void sortowaniePrzezWstawianie(int*, int, int);
-
-void sortowanieBabelkowe2D(int**, int, int, int, int);
-
-void sortowanieQuickSort(student*, int, int);
-
-void wyswietlStudentow(student*, int);
-
-elementy flagaFrancuskaMod3(student*, int);
-
-int *tablicaPrefixów(string);
-
-void knuthMorrisTekst(string, string, int*);
-
-int *BMTablica(string);
-
-void BMTekst(string, string, int*);
-
-int flagaPolska(student, int, int);
 
 void przydzielPamiec(int *&tab, int n)
 {
@@ -545,6 +510,34 @@ void KarpRabinTekst(string tekst, string wzorzec, int wzorzecHasz, char znakP, c
     if(checkWypis){
         cout << "-1";
     }
+}
+
+void wyszukiwanieLiniowe(student t[], int x, int n){
+  bool check = 1;
+  for(int i=0; i<n; i++){
+    if(t[i].punkty == x){
+      cout << i+1 << " ";
+      check = 0;
+    }
+  }
+  if(check){
+    cout << "brak";
+  }
+  cout << "\n";
+}
+
+int wyszkiwanieBisekcyjne(student t[], int x, int l, int p, int n){
+  
+  int srodek = (l+p)/2;
+  if(t[srodek].punkty == x){
+    return srodek;
+  }
+  if(t[srodek].punkty < x){
+    return wyszkiwanieBisekcyjne(t, x, l, srodek-1, n);
+  }
+  else {
+    return wyszkiwanieBisekcyjne(t, x, srodek+1, p, n);
+  }
 }
 
 #endif //FUNKCJE_H
